@@ -1,8 +1,7 @@
 import net.bytebuddy.dynamic.scaffold.TypeInitializer;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -10,20 +9,28 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SeleniumTest {
 
-    private static FirefoxDriver driver = null;
-    private static String ROOTURL = "https://campusonline.uni-ulm.de/qislsf/rds?state=user&type=0";
+    private FirefoxDriver driver = null;
+    private String ROOTURL = "https://campusonline.uni-ulm.de/qislsf/rds?state=user&type=0";
 
     /**
      * starts a session before all tests
      */
-    @BeforeAll
-    public static void setUp() {
+    @BeforeEach
+    public void setUp() {
         driver = new FirefoxDriver();
         driver.manage().window().setSize(new Dimension(930,1140));
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get(ROOTURL);
+    }
+
+    @AfterEach
+    public void cleanUp() {
+        driver.quit();
     }
 
 
@@ -94,7 +101,7 @@ public class SeleniumTest {
     }
 
     @Test
-    public void testSearchingForCourse() {
+    public void testSearchingForCourse() throws InterruptedException {
         driver.findElement(
                 new By.ByLinkText("Veranstaltungen")
         ).click();
@@ -107,16 +114,20 @@ public class SeleniumTest {
 
         driver.findElement(By.id("veranstaltung.dtxt")).sendKeys(Keys.ENTER);
 
+        var result = driver.findElement(
+                                new By.ByXPath(
+                                        "//td/a[contains(text(),'Softwarequalitätssicherung')]"
+                                ));
 
 
 
-        var link = driver.findElement(new By.ByXPath("//td/a"));
+        Assertions.assertNotNull(result, "Table doesn't contain Softwarequalitätssicherung");
 
-        Assertions.assertNotNull(link, "Table doesn't contain Softwarequalitätssicherung");
+        result.click();
 
-        link.click();
 
-        var list = driver.findElement(new By.ByXPath("//td[@class=mod_n]"));
+
+        var list = result.findElement(new By.ByCssSelector(".mod_n"));
 
         Assertions.assertNotNull(list.findElement(new By.ByXPath("//*[contains(text(),'CS7251.000')]")), "ID isn't in table");
 
