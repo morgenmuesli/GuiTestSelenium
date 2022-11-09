@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a34a2ec3-26af-4c3d-985d-a958fa6d6144" name="Changes" comment="feature: fucking finish">
+    <list default="true" id="a34a2ec3-26af-4c3d-985d-a958fa6d6144" name="Changes" comment="bug: fix apostrophe">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/geckodriver.exe" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/SeleniumTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/SeleniumTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -118,7 +120,7 @@
       <option name="presentableId" value="Default" />
       <updated>1667992676756</updated>
       <workItem from="1667992677998" duration="12409000" />
-      <workItem from="1668007363864" duration="17000" />
+      <workItem from="1668007363864" duration="1046000" />
     </task>
     <task id="LOCAL-00001" summary="feature: add SeleniumTest">
       <created>1668002813347</created>
@@ -155,7 +157,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668006371082</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="bug: fix apostrophe">
+      <created>1668007424386</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1668007424386</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -175,6 +184,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feature: add SeleniumTest" />
     <MESSAGE value="feature: fucking finish" />
-    <option name="LAST_COMMIT_MESSAGE" value="feature: fucking finish" />
+    <MESSAGE value="bug: fix apostrophe" />
+    <option name="LAST_COMMIT_MESSAGE" value="bug: fix apostrophe" />
   </component>
 </project>

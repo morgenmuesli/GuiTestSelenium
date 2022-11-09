@@ -9,8 +9,6 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SeleniumTest {
 
@@ -133,11 +131,17 @@ public class SeleniumTest {
 
         Assertions.assertNotNull(list, "ID isn't in table");
 
+    }
 
 
-
-
-
+    public void checkSibling(String labelText) {
+        var input_field = driver.findElement(new By.ByXPath(String.format("//label[contains(text(), \"%s\")]/following-sibling::input", labelText)));
+        Assertions.assertNotNull(input_field, String.format("Input for %s does not exist", labelText));
+    }
+    @Test
+    public void testLoginPromps() {
+        checkSibling("Benutzerkennung");
+        checkSibling("Passwort");
 
     }
 }
