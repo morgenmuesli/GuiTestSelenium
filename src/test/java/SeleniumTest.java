@@ -107,7 +107,10 @@ public class SeleniumTest {
 
         driver.findElement(By.id("veranstaltung.dtxt")).sendKeys(Keys.ENTER);
 
-        var link = driver.findElement(new By.ByXPath("//td/a[contains(text(), 'Softwarequalitätssicherung')]"));
+
+
+
+        var link = driver.findElement(new By.ByXPath("//td/a"));
 
         Assertions.assertNotNull(link, "Table doesn't contain Softwarequalitätssicherung");
 
