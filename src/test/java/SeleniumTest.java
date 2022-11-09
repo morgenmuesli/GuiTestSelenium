@@ -28,7 +28,12 @@ public class SeleniumTest {
         driver.get(ROOTURL);
     }
 
-
+    @AfterEach
+    public void cleanUp() {
+        if(driver != null){
+            driver.quit();
+        }
+    }
 
 
 
@@ -78,7 +83,7 @@ public class SeleniumTest {
      */
     @Test
     public void testEnglish() {
-        String[] desiredElements = {"Student life",
+        String[] desiredElements = {"Student's Corner",
                 "Courses",
                 "Orgunits",
                 "Study",
