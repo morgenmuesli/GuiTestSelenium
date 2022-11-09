@@ -1,14 +1,15 @@
-import net.bytebuddy.dynamic.scaffold.TypeInitializer;
-import org.junit.jupiter.api.*;
-
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
-
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.Dimension;
+
+import java.util.concurrent.TimeUnit;
 
 public class SeleniumTest {
 
@@ -21,28 +22,26 @@ public class SeleniumTest {
     @BeforeEach
     public void setUp() {
         driver = new FirefoxDriver();
-        driver.manage().window().setSize(new Dimension(930,1140));
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().window().setSize(new Dimension(930, 1140));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.get(ROOTURL);
     }
 
     @AfterEach
     public void cleanUp() {
-        if(driver != null){
+        if (driver != null) {
             driver.quit();
         }
     }
 
 
-
-    public WebElement getTopbar(){
+    public WebElement getTopbar() {
         return driver.findElement(
                 new By.ByXPath("//div[@class='divlinks']"));
     }
 
-    public void checkIfElementContainsEntries(WebElement element, String[] entries)
-    {
-        for (var entry:
+    public void checkIfElementContainsEntries(WebElement element, String[] entries) {
+        for (var entry :
                 entries) {
             Assertions.assertNotNull(
                     element.findElement(new By.ByXPath(
@@ -60,7 +59,7 @@ public class SeleniumTest {
      * test if topmenu consist desired entries
      */
     @Test
-    public void testTopMenu(){
+    public void testTopMenu() {
         String[] desiredElements = {"Studentisches Leben",
                 "Veranstaltungen",
                 "Organisationseinheiten",
@@ -110,21 +109,22 @@ public class SeleniumTest {
                 new By.ByLinkText("Suche nach Veranstaltungen")
         ).click();
 
-        driver.findElement(By.id("veranstaltung.dtxt")).sendKeys("Softwarequalitätssicherung");
+        driver.findElement(By.id("veranstaltung.dtxt")).sendKeys(
+            "Softwarequalitätssicherung");
 
         driver.findElement(By.id("veranstaltung.dtxt")).sendKeys(Keys.ENTER);
 
         var result = driver.findElement(
-                                new By.ByXPath(
-                                        "//td/a[contains(text(),'Softwarequalitätssicherung')]"
-                                ));
+                new By.ByXPath(
+
+                    "//td/a[contains(text(),'Softwarequalitätssicherung')]"
+                ));
 
 
-
-        Assertions.assertNotNull(result, "Table doesn't contain Softwarequalitätssicherung");
+        Assertions.assertNotNull(result,
+            "Table doesn't contain Softwarequalitätssicherung");
 
         result.click();
-
 
 
         var list = driver.findElement(new By.ByXPath("//td[@class='mod_n' and contains(text(),'CS7251.000')]"));
@@ -135,9 +135,11 @@ public class SeleniumTest {
 
 
     public void checkSibling(String labelText) {
-        var input_field = driver.findElement(new By.ByXPath(String.format("//label[contains(text(), \"%s\")]/following-sibling::input", labelText)));
+        var input_field = driver.findElement(
+            new By.ByXPath(String.format("//label[contains(text(), \"%s\")]/following-sibling::input", labelText)));
         Assertions.assertNotNull(input_field, String.format("Input for %s does not exist", labelText));
     }
+
     @Test
     public void testLoginPromps() {
         checkSibling("Benutzerkennung");
