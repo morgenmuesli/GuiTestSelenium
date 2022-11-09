@@ -48,7 +48,7 @@ public class SeleniumTest {
                 entries) {
             Assertions.assertNotNull(
                     element.findElement(new By.ByXPath(
-                            String.format("//a[contains(text(),'%s')]",
+                            String.format("//a[contains(text(),\"%s\")]",
                                     entry)
                     )),
                     String.format("%s is not in element", entry)
