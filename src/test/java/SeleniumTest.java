@@ -28,10 +28,7 @@ public class SeleniumTest {
         driver.get(ROOTURL);
     }
 
-    @AfterEach
-    public void cleanUp() {
-        driver.quit();
-    }
+
 
 
 
@@ -127,9 +124,10 @@ public class SeleniumTest {
 
 
 
-        var list = result.findElement(new By.ByCssSelector(".mod_n"));
+        var list = driver.findElement(new By.ByXPath("//td[@class='mod_n' and contains(text(),'CS7251.000')]"));
 
-        Assertions.assertNotNull(list.findElement(new By.ByXPath("//*[contains(text(),'CS7251.000')]")), "ID isn't in table");
+        Assertions.assertNotNull(list, "ID isn't in table");
+
 
 
 
